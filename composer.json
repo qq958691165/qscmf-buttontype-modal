@@ -1,0 +1,33 @@
+{
+    "name": "quansitech/qscmf-buttontype-modal",
+    "description": "qscmf modal button",
+    "keywords": ["qscmf", "component", "modal", "button"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "xhiny",
+            "email": "axhiny@163.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "tiderjian/think-core": ">=11.23.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Qs\\TopButton\\": "src/TopButton/",
+            "Qs\\ListRightButton\\": "src/ListRightButton/",
+            "Qs\\ModalButton\\": "src/"
+        }
+    },
+    "extra": {
+        "qscmf": {
+            "providers": [
+                "Qs\\TopButton\\ModalButtonProvider",
+                "Qs\\ListRightButton\\ModalButtonProvider",
+                "Qs\\ModalButton\\ModalButtonProvider"
+            ]
+        }
+    }
+}
