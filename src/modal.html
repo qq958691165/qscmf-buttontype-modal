@@ -1,0 +1,74 @@
+<div class="qs-button-type-modal modal fade" id="{$gid}QsButtonModal" tabindex="-1" role="dialog"
+     aria-labelledby="{$gid}QsButtonModalLabel" aria-hidden="true"
+     data-keyboard="{$keyboard === true}"
+     data-backdrop="{$backdrop === 'static' ? 'static' : true}" >
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <eq name="show_header" value="true">
+        <div class="modal-header">
+          <h5 class="modal-title" id="{$gid}QsButtonModalLabel">{$header_title}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </eq>
+      <div class="modal-body">
+        <div class="preloader hidden">
+          <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+        </div>
+        <div class="button-modal-body-info scrollbar-primary">
+          {$body_html}
+        </div>
+      </div>
+
+      <eq name="show_footer" value="true">
+        <div class="modal-footer">
+          <notempty name="footer_button">
+              <volist name="footer_button" id="button">
+                <button {$button.attribute}>{$button.title}</button>&nbsp;
+              </volist>
+          </notempty>
+        </div>
+      </eq>
+    </div>
+  </div>
+</div>
+
+<notdefined name="qs-button-type-modal">
+  <link rel="stylesheet" href="{:asset('button-type-modal/button-type-modal.css')}" />
+  <script type="text/javascript" src="{:asset('button-type-modal/button-type-modal.js')}"></script>
+  <define name="qs-button-type-modal" value="1" />
+</notdefined>
+
+<script type="text/javascript">
+  jQuery(document).ready(function ($) {
+    let domId = "{$gid}QsButtonModal";
+    let qsButtonTypeModalPDom = $('#'+domId +' .modal-dialog:first-child');
+    let qsButtonTypeModalBodyDom = $('#'+domId +' .modal-body:first-child');
+
+    let options = {};
+    options.dialogWidth = "{$dialog_width}";
+    options.dialogHeight = "{$dialog_height}";
+    options.bodyHeight = "{$body_height}";
+    options.bodyApiUrl = "{$body_api_url}";
+
+    if (options.dialogWidth) resetModalCss('width', options.dialogWidth,qsButtonTypeModalPDom);
+    if (options.dialogHeight) resetModalCss('height', options.dialogHeight,qsButtonTypeModalPDom);
+    if (options.bodyHeight) resetModalCss('height', options.bodyHeight,qsButtonTypeModalBodyDom);
+
+    moveToBodyBottom(domId);
+
+    $("#{$gid}").on('click', function () {
+      let modalDom = $('#'+domId);
+      console.log($(this));
+
+      if (options.bodyApiUrl){
+        renderQsButtonModalBodyContent(modalDom, options.bodyApiUrl)
+      }else{
+        injectSubmitTargetFormClass(modalDom);
+      };
+
+    });
+  });
+</script>

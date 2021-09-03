@@ -1,0 +1,193 @@
+## ModalButtonBuilder
+```text
+构建一个模态框
+```
+
+带有表单的模态框
+
+```php
+public function add(){
+    if (IS_POST) {
+        // 业务逻辑
+    }
+    else {
+        // 使用FormBuilder快速建立表单页面。
+        $builder = new \Qscmf\Builder\FormBuilder();
+        $builder
+            ->setPostUrl(U('add'))
+            ->addFormItem('nick_name', 'text', '用户名*')
+            ->addFormItem('email', 'text', '电子邮箱*')
+            ->addFormItem('telephone', 'text', '手机')
+            ->addFormItem('pwd', 'password', '密码*')
+            ->addFormItem('pwd1', 'password', '重复密码*')
+            ->setShowBtn(false);
+
+        return $builder->display(true);
+    }
+}
+
+
+return (new \Qs\ModalButton\ModalButtonBuilder())
+            ->setTitle("自定义标题")
+            ->setBody($this->add());
+```
+
+
+
+#### setTitle
+```text
+设置模态框的标题
+```
+```php
+// 参数说明
+// string $title 标题
+->setTitle("title")
+```
+
+#### setBody
+```text
+设置模态框的内容
+```
+```php
+// 参数说明
+// string $html body的html
+->setBody("body")
+
+// 可以搭配FormBuilder展示和提交表单
+$form_builder_html = '使用FormBuilder生成Html';// 使用FormBuilder构建页面
+->setBody($form_builder_html)
+```
+
+#### setBodyApiUrl
+```text
+使用接口设置模态框的内容
+```
+```php
+// 参数说明
+// string $body_api_url api
+->setBodyApiUrl(U('genModalForm'))
+
+// api需要返回 status 和 info 字段
+// 成功时status 应为1 info 应为模态框body的html内容
+// 失败时status 应为0 info 应为错误提示
+public function genModalForm(){
+    if (IS_POST) {
+        // 业务逻辑
+    }
+    else {
+        // 使用FormBuilder快速建立表单页面。
+        $builder = new \Qscmf\Builder\FormBuilder();
+        $builder
+            ->setPostUrl(U('add'))
+            ->addFormItem('nick_name', 'text', '用户名*')
+            ->addFormItem('email', 'text', '电子邮箱*')
+            ->addFormItem('telephone', 'text', '手机')
+            ->addFormItem('pwd', 'password', '密码*')
+            ->addFormItem('pwd1', 'password', '重复密码*')
+            ->setShowBtn(false);
+
+        $this->ajaxReturn(['status' => 1, 'info' => $builder->display(true)];
+    }
+}
+```
+
+#### setDialogWidth
+```text
+自定义模态框宽度
+```
+```php
+// 参数说明
+// string $width 宽度
+->setDialogWidth("80%")
+```
+
+#### setDialogHeight
+```text
+自定义模态框高度
+```
+```php
+// 参数说明
+// string $height 高度
+->setDialogHeight("80%")
+```
+
+#### setBodyHeight
+```text
+自定义模态框body高度
+
+模态框会自动处理滑动，若不需要滑动，则传入一个百分比
+```
+```php
+// 参数说明
+// string $height 高度
+->setBodyHeight("60px")
+->setBodyHeight("60vh")
+```
+
+#### setIsShowFooter
+```text
+是否展示模态框footer
+```
+```php
+// 参数说明
+// boolean $is_show 默认为true
+->setIsShowFooter(false)
+```
+
+#### showDefBtn
+```text
+是否展示默认的关闭、确定按钮
+```
+```php
+// 参数说明
+// boolean $show_default_btn 默认为true
+->showDefBtn(false)
+```
+
+#### setKeyboard
+```text
+是否可以使用ESC关闭模态框
+```
+```php
+// 参数说明
+// boolean $is_close 默认为true
+->setKeyboard(false)
+```
+
+#### setBackdrop
+```text
+点击遮罩层是否可以关闭模态框
+```
+```php
+// 参数说明
+// boolean $is_close 默认为true
+->setBackdrop(false)
+```
+
+#### setAjaxSubmit
+```text
+使用ajax-post提交表单数据
+```
+```php
+// 参数说明
+// boolean $ajax_submit 默认为true
+->setAjaxSubmit(false)
+```
+
+#### setIsForward
+```text
+提交数据后是否跳转至新页面
+```
+```php
+// 参数说明
+// boolean $is_forward 默认为true
+->setIsForward(false)
+```
+
+#### getGid
+```text
+获取模态框id
+```
+```php
+->getGid()
+```
