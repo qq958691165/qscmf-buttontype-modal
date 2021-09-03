@@ -114,13 +114,10 @@ public function genModalForm(){
 #### setBodyHeight
 ```text
 自定义模态框body高度
-
-模态框会自动处理滑动，若不需要滑动，则传入一个百分比
 ```
 ```php
 // 参数说明
 // string $height 高度
-->setBodyHeight("60px")
 ->setBodyHeight("60vh")
 ```
 
@@ -185,9 +182,8 @@ public function genModalForm(){
 ```
 
 #### getGid
-```text
-获取模态框id
-```
 ```php
+// 获取模态框随机码值
+// 模态框dom 的id为 idQsButtonModal
 ->getGid()
 ```
