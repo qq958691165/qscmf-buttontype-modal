@@ -22,7 +22,7 @@ function renderQsButtonModalBodyContent(modalDom, apiUrl) {
         injectSubmitTargetFormClass(modalDom);
     }).catch(res =>{
         alert(res.info || '错误');
-        $('#{$gid}QsButtonModal').modal('hide');
+        modalDom.modal('hide');
     });
 }
 
@@ -47,7 +47,6 @@ function injectSubmitTargetFormClass(modalDom){
             modalFormDom.removeClass('builder-form');
         }
         modalFormDom.addClass(submitDom.attr('target-form'));
-        console.log(modalDom)
     }
 }
 
