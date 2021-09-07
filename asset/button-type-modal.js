@@ -21,7 +21,7 @@ function renderQsButtonModalBodyContent(modalDom, apiUrl) {
         infoDom.html(res.info || '');
         injectSubmitTargetFormClass(modalDom);
     }).catch(res =>{
-        alert(res.info || '错误');
+        alert(res.info || '错误，请联系管理员');
         modalDom.modal('hide');
     });
 }
@@ -75,6 +75,10 @@ $(document).on('show.bs.modal', '.modal', function(event) {
     let modalZIndex = calModalZIndex();
     $('body').find(".modal-backdrop:last").css("z-index", modalZIndex);
     $(this).css("z-index", modalZIndex + 1);
+}).on('hide.bs.modal', '.modal', function(event) {
+    let modalZIndex = calModalZIndex();
+    $(this).css("z-index", modalZIndex);
+    $('body').find(".modal-backdrop:last").css("z-index", modalZIndex-1);
 }).on('hidden.bs.modal', '.modal', function(event) {
     let modalZIndex = calModalZIndex();
     $('body').find(".modal-backdrop:last").css("z-index", modalZIndex-1);

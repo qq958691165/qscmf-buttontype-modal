@@ -28,7 +28,8 @@ class Modal extends ListRightButton
 
         $option['attribute']['id'] = $gid;
 
-        $listBuilder->addContentBottom((string)$builder);
+        \Bootstrap\RegisterContainer::registerBodyHtml((string)$builder);
+//        $listBuilder->addContentBottom((string)$builder);
         return '';
     }
 

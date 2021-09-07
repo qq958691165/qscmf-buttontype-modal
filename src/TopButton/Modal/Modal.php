@@ -25,7 +25,9 @@ class Modal extends \Qscmf\Builder\ButtonType\ButtonType
 
         $option['attribute']['id'] = $gid;
 
-        return (string)$builder;
+        \Bootstrap\RegisterContainer::registerBodyHtml((string)$builder);
+
+        return '';
     }
 
     protected function defaultModalBuilder(){
