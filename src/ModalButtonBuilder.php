@@ -27,6 +27,7 @@ class ModalButtonBuilder
     public function __construct()
     {
         $this->setGid();
+        $this->setModalDom();
     }
 
     protected function addDefButton(){
