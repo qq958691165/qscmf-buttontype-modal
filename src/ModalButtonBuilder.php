@@ -22,6 +22,7 @@ class ModalButtonBuilder
     protected $ajax_submit = true;
     protected $is_forward = true;
     protected $body_api_url = null;
+    protected $modal_dom = "";
 
     public function __construct()
     {
@@ -128,6 +129,15 @@ class ModalButtonBuilder
         return $this;
     }
 
+    protected function setModalDom(){
+        $this->modal_dom = $this->getGid()."QsButtonModal";
+        return $this;
+    }
+
+    public function getModalDom(){
+        return $this->modal_dom;
+    }
+
     public function __toString(){
         $this->show_footer && $this->show_default_btn && $this->addDefButton();
 
@@ -151,6 +161,7 @@ class ModalButtonBuilder
             $view->assign('dialog_height', $this->dialog_height);
             $view->assign('body_height', $this->body_height);
             $view->assign('body_api_url', $this->body_api_url);
+            $view->assign('modal_dom', $this->modal_dom);
 
             $this->modal_html = $view->fetch(__DIR__ . '/modal.html');
         }

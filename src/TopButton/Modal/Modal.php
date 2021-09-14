@@ -17,7 +17,7 @@ class Modal extends \Qscmf\Builder\ButtonType\ButtonType
             $option['options'] :$this->defaultModalBuilder();
 
         $gid = $builder->getGid();
-        $my_attribute['data-target']="#".$gid.'QsButtonModal';
+        $my_attribute['data-target']="#".$builder->getModalDom();
 
         if ($option['attribute'] && is_array($option['attribute'])) {
             $option['attribute'] = array_merge($my_attribute, $option['attribute']);

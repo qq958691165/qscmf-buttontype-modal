@@ -187,3 +187,10 @@ public function genModalForm(){
 // 模态框dom 的id为 idQsButtonModal
 ->getGid()
 ```
+
+#### getModalDom
+```php
+// 获取模态框domId
+// 模态框dom 的id为 idQsButtonModal
+->getModalDom()
+```

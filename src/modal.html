@@ -1,5 +1,5 @@
-<div class="qs-button-type-modal modal fade" id="{$gid}QsButtonModal" tabindex="-1" role="dialog"
-     aria-labelledby="{$gid}QsButtonModalLabel" aria-hidden="true"
+<div class="qs-button-type-modal modal fade" id="{$modal_dom}" tabindex="-1" role="dialog"
+     aria-labelledby="{$modal_dom}Label" aria-hidden="true"
      data-keyboard="{$keyboard === true}"
      data-backdrop="{$backdrop === 'static' ? 'static' : true}" >
 
@@ -7,7 +7,7 @@
     <div class="modal-content">
       <eq name="show_header" value="true">
         <div class="modal-header">
-          <h5 class="modal-title" id="{$gid}QsButtonModalLabel">{$header_title}</h5>
+          <h5 class="modal-title" id="{$modal_dom}Label">{$header_title}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -43,7 +43,7 @@
 
 <script type="text/javascript">
   jQuery(document).ready(function ($) {
-    let domId = "{$gid}QsButtonModal";
+    let domId = "{$modal_dom}";
     let qsButtonTypeModalPDom = $('#'+domId +' .modal-dialog:first-child');
     let qsButtonTypeModalBodyDom = $('#'+domId +' .modal-body:first-child');
 

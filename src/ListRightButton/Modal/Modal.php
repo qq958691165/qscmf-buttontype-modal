@@ -20,7 +20,7 @@ class Modal extends ListRightButton
 
         $gid = $builder->getGid();
 
-        $my_attribute['data-target']="#".$gid.'QsButtonModal';
+        $my_attribute['data-target']="#".$builder->getModalDom();
 
         if ($option['attribute'] && is_array($option['attribute'])) {
             $option['attribute'] = $listBuilder->mergeAttr($my_attribute, $option['attribute']);
