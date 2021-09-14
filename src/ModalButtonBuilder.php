@@ -124,10 +124,11 @@ class ModalButtonBuilder
         return $this;
     }
 
-    public function setBodyApiUrl($body_api_url){
-        $this->body_api_url = $body_api_url;
-        return $this;
-    }
+    // todo 待完善功能
+//    public function setBodyApiUrl($body_api_url){
+//        $this->body_api_url = $body_api_url;
+//        return $this;
+//    }
 
     protected function setModalDom(){
         $this->modal_dom = $this->getGid()."QsButtonModal";

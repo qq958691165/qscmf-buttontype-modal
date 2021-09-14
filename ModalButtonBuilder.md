@@ -61,6 +61,7 @@ $form_builder_html = '使用FormBuilder生成Html';// 使用FormBuilder构建页
 #### setBodyApiUrl
 ```text
 使用接口设置模态框的内容
+(待完善功能)
 ```
 ```php
 // 参数说明
