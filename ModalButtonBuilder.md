@@ -32,6 +32,40 @@ return (new \Qs\ModalButton\ModalButtonBuilder())
             ->setBody($this->add());
 ```
 
++ 表单使用select2组件，需要修改宽度和dropdownParent属性
+
+  ```php
+  protected function buildTopModal(){
+    $modal = (new \Qs\ModalButton\ModalButtonBuilder());
+    return $modal
+        ->setTitle('新增modal')
+        ->setKeyboard(false)
+        ->setBackdrop(false)
+        ->setBody($this->add($modal->getModalDom()));
+  }
+  
+  public function add($modal_id = null){
+      if (IS_POST) {
+            // 业务逻辑
+      }
+      else {
+          $data_list = ["status" => 1];
+          $project_info = [
+            '41' => 'text1',
+            '42' => 'text2',
+            '43' => 'text3',
+          ];
+          $builder = new \Qscmf\Builder\FormBuilder();
+          $builder
+              ->setPostUrl(U('add'))
+              ->addFormItem("project_id", "select2", "所属项目", '',$project_info,"",' style="width: 100%" dropdownParent="#'.$modal_id.'"')
+              ->setFormData($data_list)
+              ->setShowBtn(false);
+
+          return $builder->display(true);
+      }
+  }
+  ```
 
 
 #### setTitle
