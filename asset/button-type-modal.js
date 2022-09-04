@@ -16,18 +16,44 @@ function renderQsButtonModalBodyContent(modalDom, apiUrl) {
     //     }
     // });
 
-    ajaxPromise(apiUrl).then(res =>{
+    ajaxPromise(apiUrl).then(function(res){
         modalDom.find('.preloader').addClass('hidden');
-        infoDom.html(res.info || '');
+        var mainDom = $("<div>" + res.info + "</div>");
+        var scriptSrcDom = mainDom.find('script[src]');
+
+        return loadedPromise(scriptSrcDom, infoDom, mainDom);
+    }).then(function(dom){
+        infoDom.html(dom.html());
         injectSubmitTargetFormClass(modalDom);
-    }).catch(res =>{
+    }).catch(function(res){
+        console.log(res);
         alert(res.info || '错误，请联系管理员');
         modalDom.modal('hide');
     });
 }
 
-function ajaxPromise(apiUrl){
+function loadedPromise(scripts, infoDom, mainDom){
     return new Promise((resolve, reject) =>{
+        var len = scripts.length;
+        var count = 0;
+
+        for(var i=0; i<scripts.length; i++){
+            var scriptDom = document.createElement("script");
+            scriptDom.onload = function(){
+                count++;
+                if(count === len){
+                    resolve(mainDom);
+                }
+            }
+            scriptDom.src = scripts[i].src;
+            scripts[i].remove();
+            document.body.append(scriptDom);
+        }
+    });
+}
+
+function ajaxPromise(apiUrl){
+    return new Promise(function(resolve, reject){
         $.get(apiUrl, function (res) {
             if (res.status === 1) {
                 resolve(res);
