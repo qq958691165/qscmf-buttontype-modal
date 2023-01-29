@@ -114,13 +114,13 @@ composer require quansitech/qscmf-buttontype-modal
             ->setFormData($info)
             ->setShowBtn(false);
   
-        $this->ajaxReturn(['status' => 1, 'info' => $builder->display(true)];
+        return $builder->display(true);
     }
   }
   
   public function buildEditFormModalWithApi($id){
     return (new \Qs\ModalButton\ModalButtonBuilder())
-        ->setBodyApiUrl(U('edit', ['id' => $id]))
+        ->setBody($this->edit($id))
         ->setKeyboard(false)
         ->setBackdrop(false)
         ->setIsForward(false)

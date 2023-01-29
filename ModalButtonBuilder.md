@@ -138,7 +138,7 @@ public function genModalForm(){
 
 #### setDialogHeight
 ```text
-自定义模态框高度
+自定义模态框距离屏幕顶部高度
 ```
 ```php
 // 参数说明
