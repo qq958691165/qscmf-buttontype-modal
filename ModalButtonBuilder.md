@@ -229,3 +229,13 @@ public function genModalForm(){
 // 模态框dom 的id为 idQsButtonModal
 ->getModalDom()
 ```
+
+#### setSelectedIdName
+```text
+设置ListBuilder选中checkbox值的字段名，默认为qslb_selected_ids
+```
+```php
+// 参数说明
+// string $name 
+->setSelectedIdFieldName($name)
+```

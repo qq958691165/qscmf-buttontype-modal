@@ -23,6 +23,8 @@ class ModalButtonBuilder
     protected $is_forward = true;
     protected $body_api_url = null;
     protected $modal_dom = "";
+    protected string $inject_selected_id_class = "inject_selected";
+    protected string $selected_id_field_name = 'qslb_selected_ids';
 
     public function __construct()
     {
@@ -140,6 +142,11 @@ class ModalButtonBuilder
         return $this->modal_dom;
     }
 
+    public function setSelectedIdFieldName($name){
+        $this->selected_id_field_name = $name;
+        return $this;
+    }
+
     public function __toString(){
         $this->show_footer && $this->show_default_btn && $this->addDefButton();
 
@@ -164,6 +171,8 @@ class ModalButtonBuilder
             $view->assign('body_height', $this->body_height);
             $view->assign('body_api_url', $this->body_api_url);
             $view->assign('modal_dom', $this->modal_dom);
+            $view->assign('inject_selected_id_class', $this->inject_selected_id_class);
+            $view->assign('selected_id_field_name', $this->selected_id_field_name);
 
             $this->modal_html = $view->fetch(__DIR__ . '/modal.html');
         }

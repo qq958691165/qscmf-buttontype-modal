@@ -66,7 +66,11 @@
         renderQsButtonModalBodyContent(modalDom, options.bodyApiUrl)
       }else{
         injectSubmitTargetFormClass(modalDom);
-      };
+      }
+      if ($(this).hasClass("{$inject_selected_id_class}")){
+        let selected_id_name = "{$selected_id_field_name}";
+        injectCheckedIds(modalDom.find('.modal-body form'), selected_id_name);
+      }
 
     });
   });

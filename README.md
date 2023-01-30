@@ -172,3 +172,26 @@ composer require quansitech/qscmf-buttontype-modal
   >    $this->ajaxReturn(['status' => 1, 'info' => $builder->build(true)]);
   > }
   > ```
+
++ 模态框表单获取ListBuilder选中的checkbox值
+  + 按钮添加样式 inject_selected
+  + 可自定义对应的表单字段值，默认为 qslb_selected_ids
+  + 用法
+    ```php
+    $builder = new \Qscmf\Builder\ListBuilder();
+    $builder = $builder->setMetaTitle('可编辑测试列表');
+    $builder
+            ->addTopButton('modal', ['title' => '新增', 'class' => "btn btn-primary inject_selected"],'','',$this->buildAddModal());
+    
+    
+    protected function buildAddModal(){
+        $modal = (new \Qs\ModalButton\ModalButtonBuilder());
+        return
+            $modal
+                ->setTitle('新增可编辑测试')
+                ->setBackdrop(false)
+                ->setKeyboard(false)
+                ->setSelectedIdFieldName("org_id")
+                ->setBody($this->add());
+    }
+    ```

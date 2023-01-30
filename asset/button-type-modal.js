@@ -76,6 +76,23 @@ function injectSubmitTargetFormClass(modalDom){
     }
 }
 
+function injectCheckedIds(modalFormDom, name){
+    let selectIds = $(".builder .check-all").data("checkedIds") || "";
+
+    let checkedIdsDom = modalFormDom.find("."+name);
+    if (checkedIdsDom.length === 0){
+        let selectIdsDom= document.createElement("input");
+        selectIdsDom.setAttribute("type","hidden");
+        selectIdsDom.setAttribute("name", name);
+        selectIdsDom.setAttribute("class", name);
+        selectIdsDom.setAttribute("value", selectIds);
+
+        modalFormDom[0].appendChild(selectIdsDom);
+    }else{
+        checkedIdsDom.val(selectIds);
+    }
+}
+
 function resetModalCss(name, value, dom) {
     dom.css(name, value);
 }
