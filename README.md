@@ -174,8 +174,8 @@ composer require quansitech/qscmf-buttontype-modal
   > ```
 
 + 模态框表单获取ListBuilder选中的checkbox值
-  + 按钮添加样式 inject_selected
-  + 可自定义对应的表单字段值，默认为 qslb_selected_ids
+  + 按钮添加样式类 inject_selected
+  + 可使用ModalButtonBuilder对象的setSelectedIdFieldName方法自定义对应的表单字段值，默认为 qslb_selected_ids
   + 用法
     ```php
     $builder = new \Qscmf\Builder\ListBuilder();
