@@ -25,6 +25,7 @@ class ModalButtonBuilder
     protected $modal_dom = "";
     protected string $inject_selected_id_class = "inject_selected";
     protected string $selected_id_field_name = 'qslb_selected_ids';
+    protected bool $is_jump = false;
 
     public function __construct()
     {
@@ -40,17 +41,37 @@ class ModalButtonBuilder
     protected function addDefSubmitButton(){
         $submit_cls = 'btn btn-primary submitModal';
         $this->ajax_submit && $submit_cls .=' ajax-post ';
-        $this->is_forward && $submit_cls .= ' no-refresh no-forward ';
+        !$this->isJump() && $submit_cls .= ' no-refresh no-forward ';
 
         $this->addFooterButton('确定', ['type' => 'submit', 'class' => $submit_cls,'target-form' => $this->getGid().'-builder-form']);
+    }
+
+    protected function isJump(){
+        if ($this->is_jump === true){
+            return true;
+        }
+        if ($this->is_forward === false){
+            return true;
+        }
+
+        return false;
     }
 
     protected function setGid(){
         $this->gid = Str::uuid()->toString();
     }
 
+    /**
+     * @deprecated 在v2版本删除， 请使用 setIsJump 代替
+     * 显示页面
+     */
     public function setIsForward($is_forward){
         $this->is_forward = $is_forward;
+        return $this;
+    }
+
+    public function setIsJump($is_jump){
+        $this->is_jump = $is_jump;
         return $this;
     }
 

@@ -208,12 +208,22 @@ public function genModalForm(){
 
 #### setIsForward
 ```text
-提交数据后是否跳转至新页面
+提交数据后是否跳转至新页面，false 跳转 true 不跳转，默认为true
 ```
 ```php
 // 参数说明
 // boolean $is_forward 默认为true
 ->setIsForward(false)
+```
+
+#### setIsJump
+```text
+提交数据后是否跳转至新页面，false 不跳转 true 跳转，默认为false 
+```
+```php
+// 参数说明
+// boolean $is_jump 默认为false
+->setIsJump($is_jump)
 ```
 
 #### getGid
