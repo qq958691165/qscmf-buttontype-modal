@@ -194,4 +194,18 @@ composer require quansitech/qscmf-buttontype-modal
                 ->setSelectedIdFieldName("org_id")
                 ->setBody($this->add());
     }
+  
+    public function add(){
+        $builder = new FormBuilder();
+        $builder
+                ->addFormItem('title', 'text', '标题')
+                ->addFormItem('summary', 'textarea', '简介')
+                ->addFormItem('cover', 'picture', '封面', '尺寸为214*250px', ['width' => 214, 'height' => 250])
+                ->setFormData($info)
+                ->setShowBtn(false);
+                
+            return $builder->display(true);
+        }
+    }
+  
     ```
