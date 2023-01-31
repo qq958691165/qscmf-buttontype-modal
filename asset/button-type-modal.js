@@ -78,13 +78,14 @@ function injectSubmitTargetFormClass(modalDom){
 
 function injectCheckedIds(modalFormDom, name){
     let selectIds = $(".builder .check-all").data("checkedIds") || "";
+    let class_name = 'qsbl-modal-'+name;
 
-    let checkedIdsDom = modalFormDom.find("."+name);
+    let checkedIdsDom = modalFormDom.find("."+class_name);
     if (checkedIdsDom.length === 0){
         let selectIdsDom= document.createElement("input");
         selectIdsDom.setAttribute("type","hidden");
         selectIdsDom.setAttribute("name", name);
-        selectIdsDom.setAttribute("class", name);
+        selectIdsDom.setAttribute("class", class_name);
         selectIdsDom.setAttribute("value", selectIds);
 
         modalFormDom[0].appendChild(selectIdsDom);
