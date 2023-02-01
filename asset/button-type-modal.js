@@ -69,9 +69,6 @@ function injectSubmitTargetFormClass(modalDom){
     let submitDom = modalDom.find('.modal-footer .submitModal');
     let modalFormDom = modalDom.find('.modal-body form');
     if (submitDom && modalFormDom){
-        if(modalFormDom.hasClass('builder-form')){
-            modalFormDom.removeClass('builder-form');
-        }
         modalFormDom.addClass(submitDom.attr('target-form'));
     }
 }
