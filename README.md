@@ -35,14 +35,14 @@ composer require quansitech/qscmf-buttontype-modal
             ->addFormItem('pwd1', 'password', '重复密码*')
             ->setShowBtn(false);
   
-        return $builder->display(true);
+        return $builder;
     }
   }
   
   public function buildTopModal(){
     return (new \Qs\ModalButton\ModalButtonBuilder())
                 ->setTitle("新增")
-                ->setBody($this->add());
+                ->bindFormBuilder($this->add());
   }
   
   // 按钮options属性传入ModalButtonBuilder对象 
@@ -70,13 +70,13 @@ composer require quansitech/qscmf-buttontype-modal
             ->setFormData($info)
             ->setShowBtn(false);
   
-        return $builder->display(true);
+        return $builder;
     }
   }
   
   public function buildEditFormModal($id ){
     return (new \Qs\ModalButton\ModalButtonBuilder())
-        ->setBody($this->edit($id))
+        ->bindFormBuilder($this->edit($id))
         ->setKeyboard(false)
         ->setBackdrop(false)
         ->setTitle('编辑');
@@ -114,13 +114,13 @@ composer require quansitech/qscmf-buttontype-modal
             ->setFormData($info)
             ->setShowBtn(false);
   
-        return $builder->display(true);
+        return $builder;
     }
   }
   
-  public function buildEditFormModalWithApi($id){
+  public function buildEditFormModal($id){
     return (new \Qs\ModalButton\ModalButtonBuilder())
-        ->setBody($this->edit($id))
+        ->bindFormBuilder($this->edit($id))
         ->setKeyboard(false)
         ->setBackdrop(false)
         ->setIsForward(false)
@@ -128,7 +128,7 @@ composer require quansitech/qscmf-buttontype-modal
     }
   
   $info = D('User')->getOne($id);
-  $info['form_edit_form'] = $this->buildEditFormModalWithApi($info['id'])
+  $info['form_edit_form'] = $this->buildEditFormModal($info['id'])
    // 表单数据需要定义'form_edit_form'的值，且该值为ModalButtonBuilder对象 
    (new \Qscmf\Builder\FormBuilder())
   ->addButton('modal',['title' => '编辑'], '', '', 'form_edit_form')
@@ -192,7 +192,7 @@ composer require quansitech/qscmf-buttontype-modal
                 ->setBackdrop(false)
                 ->setKeyboard(false)
                 ->setSelectedIdFieldName("org_id")
-                ->setBody($this->add());
+                ->bindFormBuilder($this->add());
     }
   
     public function add(){
@@ -204,7 +204,7 @@ composer require quansitech/qscmf-buttontype-modal
                 ->setFormData($info)
                 ->setShowBtn(false);
                 
-            return $builder->display(true);
+            return $builder;
         }
     }
   

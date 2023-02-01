@@ -249,3 +249,13 @@ public function genModalForm(){
 // string $name 
 ->setSelectedIdFieldName($name)
 ```
+
+#### bindFormBuilder
+```text
+设置 form_builder 属性
+```
+```php
+// 参数说明
+// FormBuilder $builder
+->bindFormBuilder($builder)
+```

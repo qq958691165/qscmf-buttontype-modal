@@ -3,6 +3,7 @@
 namespace Qs\ModalButton;
 
 use Illuminate\Support\Str;
+use Qscmf\Builder\FormBuilder;
 
 class ModalButtonBuilder
 {
@@ -26,6 +27,7 @@ class ModalButtonBuilder
     protected string $inject_selected_id_class = "inject_selected";
     protected string $selected_id_field_name = 'qslb_selected_ids';
     protected bool $is_jump = false;
+    protected FormBuilder $form_builder;
 
     public function __construct()
     {
@@ -58,7 +60,7 @@ class ModalButtonBuilder
     }
 
     protected function setGid(){
-        $this->gid = Str::uuid()->toString();
+        $this->gid = Str::uuid()->getHex();
     }
 
     /**
@@ -168,7 +170,22 @@ class ModalButtonBuilder
         return $this;
     }
 
+    public function bindFormBuilder(FormBuilder $builder):self{
+        $this->form_builder = $builder;
+        return $this;
+    }
+
+    protected function buildForm():string{
+        $this->form_builder->setGid($this->getGid());
+
+        return $this->form_builder->build(true);
+    }
+
     public function __toString(){
+        if (!empty($this->form_builder) && empty($this->body_html)){
+            $this->body_html = $this->buildForm();
+        }
+
         $this->show_footer && $this->show_default_btn && $this->addDefButton();
 
         if ($this->footer_button) {
