@@ -63,7 +63,7 @@ class ModalButtonBuilder
 
     /**
      * @deprecated 在v2版本删除， 请使用 setIsJump 代替
-     * 显示页面
+     * 提交数据后是否跳转至新页面，false 跳转 true 不跳转，默认为true
      */
     public function setIsForward($is_forward){
         $this->is_forward = $is_forward;
