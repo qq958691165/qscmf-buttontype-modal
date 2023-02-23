@@ -28,6 +28,7 @@ class ModalButtonBuilder
     protected string $selected_id_field_name = 'qslb_selected_ids';
     protected bool $is_jump = false;
     protected FormBuilder $form_builder;
+    protected string $def_submit_btn_id = '';
 
     public function __construct()
     {
@@ -40,8 +41,13 @@ class ModalButtonBuilder
         $this->addDefSubmitButton();
     }
 
+    protected function setDefSubmitBtnId():void{
+        $this->def_submit_btn_id = Str::uuid()->getHex();
+    }
+
     protected function addDefSubmitButton(){
-        $submit_cls = 'btn btn-primary submitModal';
+        $this->setDefSubmitBtnId();
+        $submit_cls = 'btn btn-primary submitModal '.$this->def_submit_btn_id;
         $this->ajax_submit && $submit_cls .=' ajax-post ';
         !$this->isJump() && $submit_cls .= ' no-refresh no-forward ';
 
@@ -211,6 +217,8 @@ class ModalButtonBuilder
             $view->assign('modal_dom', $this->modal_dom);
             $view->assign('inject_selected_id_class', $this->inject_selected_id_class);
             $view->assign('selected_id_field_name', $this->selected_id_field_name);
+            $view->assign('ajax_submit', $this->ajax_submit);
+            $view->assign('def_submit_btn_id', $this->def_submit_btn_id);
 
             $this->modal_html = $view->fetch(__DIR__ . '/modal.html');
         }

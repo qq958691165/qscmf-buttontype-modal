@@ -198,7 +198,8 @@ public function genModalForm(){
 
 #### setAjaxSubmit
 ```text
-使用ajax-post提交表单数据
+使用ajax-post提交表单数据，若为false则为form的默认提交
+只对默认提交按钮有效
 ```
 ```php
 // 参数说明

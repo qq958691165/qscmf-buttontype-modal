@@ -133,3 +133,9 @@ function calModalZIndex(){
     }
     return  modalDefZIndex;
 }
+
+function submitForm(modalDom, btnId){
+    $(document).on("click", '.modal-footer .'+btnId, function (event){
+        modalDom.find('.modal-body form').submit()
+    });
+}
