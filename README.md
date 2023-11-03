@@ -209,3 +209,7 @@ composer require quansitech/qscmf-buttontype-modal
     }
   
     ```
+
+#### 升级指南
+
+[升级指南](https://github.com/quansitech/qscmf-buttontype-modal/blob/master/Upgrade.md)
