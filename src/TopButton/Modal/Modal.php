@@ -3,10 +3,11 @@
 namespace Qs\TopButton\Modal;
 
 use Qs\ModalButton\ModalButtonBuilder;
+use Qscmf\Builder\ListBuilder;
 
 class Modal extends \Qscmf\Builder\ButtonType\ButtonType
 {
-    public function build(array &$option)
+    public function build(array &$option, ?ListBuilder $listBuilder)
     {
         $my_attribute['type'] = 'modal';
         $my_attribute['title'] = '模态框';

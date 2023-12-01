@@ -11,8 +11,8 @@
         }
     ],
     "require": {
-        "php": ">=7.2",
-        "tiderjian/think-core": ">=11.26.0"
+        "php": ">=8.2.12",
+        "tiderjian/think-core": ">=13.0.1"
     },
     "autoload": {
         "psr-4": {
