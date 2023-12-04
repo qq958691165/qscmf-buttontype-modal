@@ -12,7 +12,7 @@
     ],
     "require": {
         "php": ">=8.2.12",
-        "tiderjian/think-core": ">=13.0.1"
+        "tiderjian/think-core": ">=13.0.0"
     },
     "autoload": {
         "psr-4": {
