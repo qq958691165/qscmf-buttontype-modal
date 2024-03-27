@@ -67,6 +67,13 @@ return (new \Qs\ModalButton\ModalButtonBuilder())
   }
   ```
 
+#### setCancelText
+
+设置关闭按钮的描述
+
+#### setSubmitText
+
+设置确定按钮的描述
 
 #### setTitle
 ```text
