@@ -29,6 +29,8 @@ class ModalButtonBuilder
     protected bool $is_jump = false;
     protected FormBuilder $form_builder;
     protected string $def_submit_btn_id = '';
+    protected string $cancel_text = '关闭';
+    protected string $submit_text = "确定";
 
     public function __construct()
     {
@@ -36,8 +38,19 @@ class ModalButtonBuilder
         $this->setModalDom();
     }
 
+    public function setCancelText(string $text){
+        $this->cancel_text = $text;
+        return $this;
+    }
+
+    public function setSubmitText(string $text){
+        $this->submit_text = $text;
+        return $this;
+    }
+
+
     protected function addDefButton(){
-        $this->addFooterButton('关闭', ['type' => 'button', 'class' => 'btn btn-secondary closeModal', 'data-dismiss' => 'modal']);
+        $this->addFooterButton($this->cancel_text, ['type' => 'button', 'class' => 'btn btn-secondary closeModal', 'data-dismiss' => 'modal']);
         $this->addDefSubmitButton();
     }
 
@@ -51,7 +64,7 @@ class ModalButtonBuilder
         $this->ajax_submit && $submit_cls .=' ajax-post ';
         !$this->isJump() && $submit_cls .= ' no-refresh no-forward ';
 
-        $this->addFooterButton('确定', ['type' => 'submit', 'class' => $submit_cls,'target-form' => $this->getGid().'-builder-form']);
+        $this->addFooterButton($this->submit_text, ['type' => 'submit', 'class' => $submit_cls,'target-form' => $this->getGid().'-builder-form']);
     }
 
     protected function isJump(){
