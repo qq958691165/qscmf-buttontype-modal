@@ -1,5 +1,4 @@
 <?php
-
 namespace Qs\ModalButton;
 
 use Illuminate\Support\Str;
