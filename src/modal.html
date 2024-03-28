@@ -71,7 +71,7 @@
       }
       const useAjaxSubmit = "{$ajax_submit}";
       const btnId = "{$def_submit_btn_id}";
-      if (!useAjaxSubmit){
+      if (btnId && !useAjaxSubmit){
         submitForm(modalDom, btnId)
       }
 
