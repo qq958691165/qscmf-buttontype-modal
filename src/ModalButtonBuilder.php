@@ -1,10 +1,14 @@
 <?php
+
 namespace Qs\ModalButton;
 
+use AntdAdmin\Component\BaseComponent;
+use AntdAdmin\Component\Modal\Modal;
+use Qscmf\Builder\Antd\BuilderAdapter\FormAdapter;
 use Illuminate\Support\Str;
 use Qscmf\Builder\FormBuilder;
 
-class ModalButtonBuilder
+class ModalButtonBuilder extends BaseComponent
 {
     protected $gid;
     protected $header_title;
@@ -37,47 +41,54 @@ class ModalButtonBuilder
         $this->setModalDom();
     }
 
-    public function setCancelText(string $text){
+    public function setCancelText(string $text)
+    {
         $this->cancel_text = $text;
         return $this;
     }
 
-    public function setSubmitText(string $text){
+    public function setSubmitText(string $text)
+    {
         $this->submit_text = $text;
         return $this;
     }
 
 
-    protected function addDefButton(){
+    protected function addDefButton()
+    {
         $this->addFooterButton($this->cancel_text, ['type' => 'button', 'class' => 'btn btn-secondary closeModal', 'data-dismiss' => 'modal']);
         $this->addDefSubmitButton();
     }
 
-    protected function setDefSubmitBtnId():void{
+    protected function setDefSubmitBtnId(): void
+    {
         $this->def_submit_btn_id = Str::uuid()->getHex();
     }
 
-    protected function addDefSubmitButton(){
+    protected function addDefSubmitButton()
+    {
         $this->setDefSubmitBtnId();
-        $submit_cls = 'btn btn-primary submitModal '.$this->def_submit_btn_id;
-        $this->ajax_submit && $submit_cls .=' ajax-post ';
+        $submit_cls = 'btn btn-primary submitModal ' . $this->def_submit_btn_id;
+        $this->ajax_submit && $submit_cls .= ' ajax-post ';
         !$this->isJump() && $submit_cls .= ' no-refresh no-forward ';
 
-        $this->addFooterButton($this->submit_text, ['type' => 'submit', 'class' => $submit_cls,'target-form' => $this->getGid().'-builder-form']);
+        $this->addFooterButton($this->submit_text, ['type' => 'submit', 'class' => $submit_cls, 'target-form' => $this->getGid() . '-builder-form']);
     }
 
-    protected function isJump(){
-        if ($this->is_jump === true){
+    protected function isJump()
+    {
+        if ($this->is_jump === true) {
             return true;
         }
-        if ($this->is_forward === false){
+        if ($this->is_forward === false) {
             return true;
         }
 
         return false;
     }
 
-    protected function setGid(){
+    protected function setGid()
+    {
         $this->gid = Str::uuid()->getHex();
     }
 
@@ -85,46 +96,54 @@ class ModalButtonBuilder
      * @deprecated 在v2版本删除， 请使用 setIsJump 代替
      * 提交数据后是否跳转至新页面，false 跳转 true 不跳转，默认为true
      */
-    public function setIsForward($is_forward){
+    public function setIsForward($is_forward)
+    {
         $this->is_forward = $is_forward;
         return $this;
     }
 
-    public function setIsJump($is_jump){
+    public function setIsJump($is_jump)
+    {
         $this->is_jump = $is_jump;
         return $this;
     }
 
-    public function getGid(){
+    public function getGid()
+    {
         return $this->gid;
     }
 
-    public function setTitle($title){
+    public function setTitle($title)
+    {
         $this->header_title = $title;
         return $this;
     }
 
-    public function setBody($html){
+    public function setBody($html)
+    {
         $this->body_html = $html;
         return $this;
     }
 
-    public function setIsShowFooter($is_show){
+    public function setIsShowFooter($is_show)
+    {
         $this->show_footer = $is_show === true;
         return $this;
     }
 
-    public function addFooterButton($title, $attribute){
+    public function addFooterButton($title, $attribute)
+    {
         $attribute['type'] = $attribute['type'] ?: 'button';
         $button = ['title' => $title, 'attribute' => $attribute];
         array_push($this->footer_button, $button);
         return $this;
     }
 
-    protected function compileHtmlAttr($attr) {
+    protected function compileHtmlAttr($attr)
+    {
         $result = array();
         foreach ($attr as $key => $value) {
-            if(!empty($value) && !is_array($value)){
+            if (!empty($value) && !is_array($value)) {
                 $value = htmlspecialchars($value);
                 $result[] = "$key=\"$value\"";
             }
@@ -133,74 +152,89 @@ class ModalButtonBuilder
         return $result;
     }
 
-    public function showDefBtn($is_show){
+    public function showDefBtn($is_show)
+    {
         $this->show_default_btn = $is_show;
         return $this;
     }
 
-    public function setKeyboard($is_close){
+    public function setKeyboard($is_close)
+    {
         $this->keyboard = $is_close;
         return $this;
     }
-    public function setBackdrop($is_close){
+
+    public function setBackdrop($is_close)
+    {
         $type = $is_close === false ? 'static' : true;
         $this->backdrop = $type;
         return $this;
     }
 
-    public function setDialogWidth($width){
+    public function setDialogWidth($width)
+    {
         $this->dialog_width = $width;
         return $this;
     }
 
-    public function setDialogHeight($height){
+    public function setDialogHeight($height)
+    {
         $this->dialog_height = $height;
         return $this;
     }
 
-    public function setBodyHeight($height){
+    public function setBodyHeight($height)
+    {
         $this->body_height = $height;
         return $this;
     }
 
-    public function setAjaxSubmit($ajax_submit){
+    public function setAjaxSubmit($ajax_submit)
+    {
         $this->ajax_submit = $ajax_submit;
         return $this;
     }
 
     // todo 待完善功能
-    public function setBodyApiUrl($body_api_url){
+    public function setBodyApiUrl($body_api_url)
+    {
         $this->body_api_url = $body_api_url;
         return $this;
     }
 
-    protected function setModalDom(){
-        $this->modal_dom = $this->getGid()."QsButtonModal";
+    protected function setModalDom()
+    {
+        $this->modal_dom = $this->getGid() . "QsButtonModal";
         return $this;
     }
 
-    public function getModalDom(){
+    public function getModalDom()
+    {
         return $this->modal_dom;
     }
 
-    public function setSelectedIdFieldName($name){
+    public function setSelectedIdFieldName($name)
+    {
         $this->selected_id_field_name = $name;
         return $this;
     }
 
-    public function bindFormBuilder(FormBuilder $builder):self{
+    public function bindFormBuilder(FormBuilder $builder): self
+    {
         $this->form_builder = $builder;
         return $this;
     }
 
-    protected function buildForm():string{
+    protected function buildForm(): string
+    {
         $this->form_builder->setGid($this->getGid());
 
         return $this->form_builder->build(true);
     }
 
-    public function __toString(){
-        if (!empty($this->form_builder) && empty($this->body_html)){
+    public function __toString()
+    {
+        if (!empty($this->form_builder) && empty($this->body_html)) {
             $this->body_html = $this->buildForm();
         }
 
@@ -211,8 +245,8 @@ class ModalButtonBuilder
                 $button['attribute'] = $this->compileHtmlAttr($button['attribute']);
             }
         }
-        
-        if (!$this->modal_html){
+
+        if (!$this->modal_html) {
             $view = new \Think\View();
             $view->assign('gid', $this->gid);
             $view->assign('header_title', $this->header_title);
@@ -236,5 +270,35 @@ class ModalButtonBuilder
         }
 
         return $this->modal_html;
+    }
+
+    public function toArray()
+    {
+        if (!C('ANTD_ADMIN_BUILDER_ENABLE')) {
+            return parent::toArray();
+        }
+
+        $modal = $this->getAntdModal();
+
+        return $modal->render();
+    }
+
+    public function getAntdModal(): Modal
+    {
+        $modal = new Modal();
+
+        $this->header_title && $modal->setTitle($this->header_title);
+        $this->dialog_width && $modal->setWidth($this->dialog_width);
+
+        if ($this->body_api_url) {
+            $modal->setUrl('form', $this->body_api_url);
+            return $modal->render();
+        }
+
+        if ($this->form_builder) {
+            $formAdapter = $this->form_builder->antdRender(false);
+            $modal->setContent('form', $formAdapter->getForm());
+        }
+        return $modal;
     }
 }

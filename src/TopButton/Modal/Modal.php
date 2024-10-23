@@ -2,10 +2,13 @@
 
 namespace Qs\TopButton\Modal;
 
+use AntdAdmin\Component\Table\ActionType\BaseAction;
+use AntdAdmin\Component\Table\ActionType\Button;
 use Qs\ModalButton\ModalButtonBuilder;
+use Qscmf\Builder\Antd\BuilderAdapter\ListAdapter\IAntdTableButton;
 use Qscmf\Builder\ListBuilder;
 
-class Modal extends \Qscmf\Builder\ButtonType\ButtonType
+class Modal extends \Qscmf\Builder\ButtonType\ButtonType implements IAntdTableButton
 {
     public function build(array &$option, ?ListBuilder $listBuilder)
     {
@@ -38,4 +41,17 @@ class Modal extends \Qscmf\Builder\ButtonType\ButtonType
         return $builder;
     }
 
+    public function tableAntdRender($options, $listBuilder): BaseAction|array
+    {
+        $button = new Button($options['attribute']['title']);
+        if ($options['options'] instanceof ModalButtonBuilder) {
+            $modal = $options['options']->getAntdModal();
+
+            $button->modal($modal);
+        } else {
+            E('模态框配置错误');
+        }
+
+        return $button;
+    }
 }
