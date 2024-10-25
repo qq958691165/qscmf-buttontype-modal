@@ -2,8 +2,8 @@
 
 namespace Qs\ListRightButton\Modal;
 
-use AntdAdmin\Component\Table\ColumnType\OptionType\BaseOption;
-use AntdAdmin\Component\Table\ColumnType\OptionType\Link;
+use AntdAdmin\Component\Table\ColumnType\ActionType\BaseAction;
+use AntdAdmin\Component\Table\ColumnType\ActionType\Link;
 use Qs\ModalButton\ModalButtonBuilder;
 use Qscmf\Builder\Antd\BuilderAdapter\ListAdapter\IAntdTableRightBtn;
 use Qscmf\Builder\ListRightButton\ListRightButton;
@@ -42,7 +42,7 @@ class Modal extends ListRightButton implements IAntdTableRightBtn
         return $builder;
     }
 
-    public function tableRightBtnAntdRender($options, $listBuilder): BaseOption
+    public function tableRightBtnAntdRender($options, $listBuilder): BaseAction
     {
         $link = new Link($options['attribute']['title']);
         if (is_string($options['options'])) {
