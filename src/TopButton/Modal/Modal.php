@@ -41,7 +41,7 @@ class Modal extends \Qscmf\Builder\ButtonType\ButtonType implements IAntdTableBu
         return $builder;
     }
 
-    public function tableAntdRender($options, $listBuilder): BaseAction|array
+    public function tableButtonAntdRender($options, $listBuilder): BaseAction|array
     {
         $button = new Button($options['attribute']['title']);
         if ($options['options'] instanceof ModalButtonBuilder) {

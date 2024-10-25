@@ -42,7 +42,7 @@ class Modal extends ListRightButton implements IAntdTableRightBtn
         return $builder;
     }
 
-    public function tableAntdRender($options, $listBuilder): BaseOption
+    public function tableRightBtnAntdRender($options, $listBuilder): BaseOption
     {
         $link = new Link($options['attribute']['title']);
         if (is_string($options['options'])) {
