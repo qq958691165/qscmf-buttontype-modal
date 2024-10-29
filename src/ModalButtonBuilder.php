@@ -4,7 +4,6 @@ namespace Qs\ModalButton;
 
 use AntdAdmin\Component\BaseComponent;
 use AntdAdmin\Component\Modal\Modal;
-use Qscmf\Builder\Antd\BuilderAdapter\FormAdapter;
 use Illuminate\Support\Str;
 use Qscmf\Builder\FormBuilder;
 
@@ -291,13 +290,13 @@ class ModalButtonBuilder extends BaseComponent
         $this->dialog_width && $modal->setWidth($this->dialog_width);
 
         if ($this->body_api_url) {
-            $modal->setUrl('form', $this->body_api_url);
+            $modal->setUrl($this->body_api_url);
             return $modal->render();
         }
 
         if ($this->form_builder) {
             $formAdapter = $this->form_builder->antdRender(false);
-            $modal->setContent('form', $formAdapter->getForm());
+            $modal->setContent($formAdapter->getForm());
         }
         return $modal;
     }
