@@ -2,10 +2,13 @@
 
 namespace Qs\ListRightButton\Modal;
 
+use AntdAdmin\Component\Table\ColumnType\ActionType\BaseAction;
+use AntdAdmin\Component\Table\ColumnType\ActionType\Link;
 use Qs\ModalButton\ModalButtonBuilder;
+use Qscmf\Builder\Antd\BuilderAdapter\ListAdapter\IAntdTableRightBtn;
 use Qscmf\Builder\ListRightButton\ListRightButton;
 
-class Modal extends ListRightButton
+class Modal extends ListRightButton implements IAntdTableRightBtn
 {
 
     public function build(array &$option, array $data, $listBuilder)
@@ -29,7 +32,6 @@ class Modal extends ListRightButton
         $option['attribute']['id'] = $gid;
 
         \Bootstrap\RegisterContainer::registerBodyHtml((string)$builder);
-//        $listBuilder->addContentBottom((string)$builder);
         return '';
     }
 
@@ -40,4 +42,17 @@ class Modal extends ListRightButton
         return $builder;
     }
 
+    public function tableRightBtnAntdRender($options, $listBuilder): BaseAction
+    {
+        $link = new Link($options['attribute']['title']);
+        if (is_string($options['options'])) {
+            $link->modalByField($options['options']);
+        } elseif ($options['options'] instanceof ModalButtonBuilder) {
+            $link->modal($options['options']->getAntdModal());
+        } else {
+            E('模态框配置错误');
+        }
+
+        return $link;
+    }
 }
