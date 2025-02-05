@@ -5,8 +5,8 @@ namespace Qs\TopButton\Modal;
 use AntdAdmin\Component\Table\ActionType\BaseAction;
 use AntdAdmin\Component\Table\ActionType\Button;
 use Qs\ModalButton\ModalButtonBuilder;
-use Qscmf\Builder\Antd\BuilderAdapter\ListAdapter\IAntdTableButton;
 use Qscmf\Builder\ListBuilder;
+use Quansitech\BuilderAdapterForAntdAdmin\BuilderAdapter\ListAdapter\IAntdTableButton;
 
 class Modal extends \Qscmf\Builder\ButtonType\ButtonType implements IAntdTableButton
 {

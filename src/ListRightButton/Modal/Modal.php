@@ -5,8 +5,8 @@ namespace Qs\ListRightButton\Modal;
 use AntdAdmin\Component\Table\ColumnType\ActionType\BaseAction;
 use AntdAdmin\Component\Table\ColumnType\ActionType\Link;
 use Qs\ModalButton\ModalButtonBuilder;
-use Qscmf\Builder\Antd\BuilderAdapter\ListAdapter\IAntdTableRightBtn;
 use Qscmf\Builder\ListRightButton\ListRightButton;
+use Quansitech\BuilderAdapterForAntdAdmin\BuilderAdapter\ListAdapter\IAntdTableRightBtn;
 
 class Modal extends ListRightButton implements IAntdTableRightBtn
 {
